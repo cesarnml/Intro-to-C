@@ -15,11 +15,16 @@
 */
 void string_copy(char *x, char *y)
 {
-
+    while (*y != '\0')
+    {
+        *x = *y;
+        x++;
+        y++;
+    }
+    *x = '\0';
 }
-
 /*
-    Searches the input string `str` for the first instance of the 
+    Searches the input string `str` for the first instance of the
     character `c` (an unsigned char). This function returns a pointer
     that points to the first instance of the character `c` in the
     input string `str`.
@@ -28,7 +33,15 @@ void string_copy(char *x, char *y)
 */
 char *find_char(char *str, int c)
 {
-
+    while (*str != '\0')
+    {
+        if (*str == c)
+        {
+            return str;
+        }
+        str++;
+    }
+    return NULL;
 }
 
 /*
@@ -39,9 +52,37 @@ char *find_char(char *str, int c)
 
     Do not use the `strstr` function from the standard library.
 */
+
 char *find_string(char *haystack, char *needle)
 {
+    char *ptr;
 
+    while (*haystack != '\0')
+    {
+        ptr = haystack;
+
+        if (*ptr == *needle)
+        {
+            while (*needle != '\0')
+            {
+                if (*ptr != *needle)
+                {
+                    break;
+                }
+                ptr++;
+                needle++;
+
+                if (*needle == '\0')
+                {
+                    return haystack;
+                }
+            }
+        }
+
+        haystack++;
+    }
+
+    return NULL;
 }
 
 #ifndef TESTING
